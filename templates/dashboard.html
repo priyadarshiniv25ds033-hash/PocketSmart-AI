@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard - PocketSmart</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef3f9;
+      color: #173b5f;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+      height: 52px;
+      background: #12395f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 38px;
+      color: white;
+    }
+
+    .brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .brand-icon {
+      color: #f5a623;
+      margin-right: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.8;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      background: linear-gradient(
+        110deg,
+        #3976b5,
+        #12395f
+      );
+
+      color: white;
+      text-align: center;
+
+      padding: 42px 20px 38px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: #edf5fc;
+    }
+
+    /* ================= MAIN ================= */
+
+    .main {
+      padding: 30px 45px 0;
+    }
+
+    /* ================= PLANNER GRID ================= */
+
+    .planner-grid {
+      max-width: 1080px;
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 25px;
+    }
+
+    /* ================= CARD ================= */
+
+    .planner-card {
+      background: #ffffff;
+
+      border-radius: 13px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 5px 18px rgba(25, 55, 85, 0.14);
+
+      min-height: 350px;
+
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid #e8edf2;
+    }
+
+    /* ================= ACTUAL IMAGE ================= */
+
+    .planner-image {
+      width: 100%;
+      height: 155px;
+
+      display: block;
+
+      object-fit: cover;
+
+      background: #e9eef4;
+    }
+
+    /* ================= CARD CONTENT ================= */
+
+    .planner-content {
+      padding: 20px 20px 18px;
+
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .planner-content h3 {
+      margin: 0 0 13px;
+
+      font-size: 17px;
+
+      color: #234b70;
+
+      font-weight: 700;
+
+      line-height: 1.3;
+    }
+
+    .planner-icon {
+      margin-right: 7px;
+      font-size: 17px;
+    }
+
+    .planner-content p {
+      margin: 0;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+      color: #666;
+    }
+
+    /* ================= GET STARTED ================= */
+
+    .get-started {
+      margin-top: auto;
+      padding-top: 20px;
+    }
+
+    .get-started a {
+      display: block;
+
+      width: 100%;
+
+      height: 38px;
+
+      line-height: 38px;
+
+      text-align: center;
+
+      border-radius: 20px;
+
+      background: linear-gradient(
+        90deg,
+        #3979b9,
+        #12395f
+      );
+
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 4px 10px rgba(20, 65, 105, 0.22);
+    }
+
+    .get-started a:hover {
+      opacity: 0.92;
+    }
+
+    /* ================= HISTORY BUTTON ================= */
+
+    .history-button {
+      text-align: center;
+
+      margin: 20px 0 15px;
+    }
+
+    .history-button a {
+      display: inline-block;
+
+      background: linear-gradient(
+        90deg,
+        #f4a623,
+        #e98a00
+      );
+
+      color: white;
+
+      text-decoration: none;
+
+      padding: 10px 22px;
+
+      border-radius: 20px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 4px 10px rgba(255, 140, 0, 0.22);
+    }
+
+    /* ================= RECENT ACTIVITY ================= */
+
+    .activity-section {
+      background: #e4ebf4;
+
+      margin: 0 -45px;
+
+      padding: 45px 30px 35px;
+    }
+
+    .activity-card {
+      max-width: 650px;
+
+      margin: 0 auto;
+
+      background: white;
+
+      border-radius: 11px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 4px 15px rgba(30, 60, 90, 0.12);
+    }
+
+    .activity-header {
+      min-height: 45px;
+
+      background: linear-gradient(
+        90deg,
+        #3976b5,
+        #12395f
+      );
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 0 18px;
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+    .activity-header-icon {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .activity-list {
+      padding: 8px 18px;
+    }
+
+    .activity-item {
+      min-height: 55px;
+
+      display: flex;
+
+      align-items: center;
+
+      border-bottom: 1px solid #edf0f3;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+
+      background: #3976b5;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 12px;
+
+      margin-right: 12px;
+
+      flex-shrink: 0;
+    }
+
+    .activity-info strong {
+      display: block;
+
+      color: #234b70;
+
+      font-size: 11px;
+
+      margin-bottom: 4px;
+    }
+
+    .activity-info small {
+      display: block;
+
+      color: #888;
+
+      font-size: 9px;
+    }
+
+    .no-activity {
+      padding: 25px;
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 12px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      height: 45px;
+
+      background: #12395f;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 9px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      .navbar {
+        height: auto;
+        padding: 14px 18px;
+
+        flex-direction: column;
+
+        gap: 12px;
+      }
+
+      .nav-links {
+        gap: 13px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links a {
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 35px 15px;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .hero p {
+        font-size: 11px;
+      }
+
+      .main {
+        padding: 25px 18px 0;
+      }
+
+      .planner-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+      }
+
+      .planner-card {
+        min-height: 350px;
+      }
+
+      .activity-section {
+        margin: 0 -18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+
+    <div class="brand">
+      <span class="brand-icon">▣</span>
+      PocketSmart
+    </div>
+
+    <div class="nav-links">
+
+      <a href="/home-planner">
+        ⌂ Home Planner
+      </a>
+
+      <a href="/party-planner">
+        ♟ Party Planner
+      </a>
+
+      <a href="/jewelry-planner">
+        ♢ Jewelry Planner
+      </a>
+
+      <a href="/history">
+        ↻ History
+      </a>
+
+      <a href="#" onclick="logout(); return false;">
+        ⇥ Logout
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero">
+
+    <h1>
+      Welcome, {{ user.username }}!
+    </h1>
+
+    <p>
+      Choose a budget planner to get started with your personalized financial planning experience
+    </p>
+
+  </section>
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="main">
+
+    <!-- ================= PLANNER CARDS ================= -->
+
+    <div class="planner-grid">
+
+      <!-- HOME BUDGET PLANNER -->
+
+      <div class="planner-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80"
+          class="planner-image"
+          alt="Home Interior"
+        >
+
+        <div class="planner-content">
+
+          <h3>
+            <span class="planner-icon">🏠</span>
+            Home Budget Planner
+          </h3>
+
+          <p>
+            Plan your interior design budget efficiently with
+            AI-powered recommendations for furniture,
+            lighting, and more.
+          </p>
+
+          <div class="get-started">
+
+            <a href="/home-planner">
+              Get Started
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PARTY BUDGET PLANNER -->
+
+      <div class="planner-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=80"
+          class="planner-image"
+          alt="Party Planning"
+        >
+
+        <div class="planner-content">
+
+          <h3>
+            <span class="planner-icon">🎉</span>
+            Party Budget Planner
+          </h3>
+
+          <p>
+            Plan your perfect event with budget allocations
+            for venue, catering, decorations, and
+            entertainment.
+          </p>
+
+          <div class="get-started">
+
+            <a href="/party-planner">
+              Get Started
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- JEWELRY BUDGET PLANNER -->
+
+      <div class="planner-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80"
+          class="planner-image"
+          alt="Jewelry Planning"
+        >
+
+        <div class="planner-content">
+
+          <h3>
+            <span class="planner-icon">💎</span>
+            Jewelry Budget Planner
+          </h3>
+
+          <p>
+            Find the ideal jewelry pieces for any occasion
+            that match your outfit and stay within your
+            budget.
+          </p>
+
+          <div class="get-started">
+
+            <a href="/jewelry-planner">
+              Get Started
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= HISTORY ================= -->
+
+    <div class="history-button">
+
+      <a href="/history">
+        ↻ &nbsp; View All Recommendation History
+      </a>
+
+    </div>
+
+    <!-- ================= RECENT ACTIVITY ================= -->
+
+    <section class="activity-section">
+
+      <div class="activity-card">
+
+        <div class="activity-header">
+
+          <span class="activity-header-icon">↻</span>
+
+          Recent Activity
+
+        </div>
+
+        {% if recent %}
+
+          <div class="activity-list">
+
+            {% for item in recent %}
+
+              <div class="activity-item">
+
+                <div class="activity-icon">
+
+                  {% if item.type == "home" %}
+                    ⌂
+                  {% elif item.type == "party" %}
+                    ♟
+                  {% else %}
+                    ♢
+                  {% endif %}
+
+                </div>
+
+                <div class="activity-info">
+
+                  <strong>
+
+                    {% if item.type == "home" %}
+
+                      Home Budget Plan
+
+                    {% elif item.type == "party" %}
+
+                      Birthday Party Budget Plan
+
+                    {% else %}
+
+                      Jewelry Budget Plan
+
+                    {% endif %}
+
+                  </strong>
+
+                  <small>
+                    Created on {{ item.timestamp[:10] }}
+                  </small>
+
+                </div>
+
+              </div>
+
+            {% endfor %}
+
+          </div>
+
+        {% else %}
+
+          <div class="no-activity">
+
+            No recommendations yet.
+            Try one of the planners above!
+
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    &copy; 2026 PocketSmart. All rights reserved.
+
+  </footer>
+
+  <!-- ================= LOGOUT ================= -->
+
+  <script>
+
+    async function logout() {
+
+      await fetch("/logout", {
+        method: "POST"
+      });
+
+      window.location.href = "/login";
+
+    }
+
+  </script>
+
+</body>
+</html>

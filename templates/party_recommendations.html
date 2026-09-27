@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Party Budget Recommendations - PocketSmart</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f3f8;
+            color: #263238;
+            font-size: 14px;
+        }
+
+        .page {
+            width: 94%;
+            max-width: 900px;
+            margin: 28px auto;
+        }
+
+        /* MAIN CARD */
+
+        .recommendation-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.10);
+        }
+
+        /* TOP */
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            color: #214d76;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .print-btn {
+            border: none;
+            background: #3978bd;
+            color: white;
+            padding: 9px 14px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
+            background: #285f96;
+        }
+
+        .budget-title {
+            color: #3978bd;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 0 14px;
+            border-bottom: 1px solid #e2e5e9;
+        }
+
+        /* CATEGORY */
+
+        .category {
+            background: #f7f7fb;
+            border: 1px solid #e2e5ec;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 13px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #315f8d;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 5px 4px 9px;
+        }
+
+        .category-name {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .category-allocation {
+            color: #263238;
+            font-size: 13px;
+        }
+
+        /* ITEM */
+
+        .item {
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 8px;
+        }
+
+        .item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .item-name {
+            color: #37474f;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .item-price {
+            color: #263238;
+            font-weight: bold;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            margin-top: 5px;
+            color: #607d8b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .quantity {
+            margin-top: 5px;
+            color: #607d8b;
+            font-size: 12px;
+        }
+
+        /* SHOP LINKS */
+
+        .shop-row {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #546e7a;
+        }
+
+        .shop-links {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-left: 5px;
+        }
+
+        .shop-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #315f8d;
+            border: 1px solid #b9c9d8;
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 4px 7px;
+            font-size: 10px;
+        }
+
+        .shop-link:hover {
+            background: #eef5fc;
+        }
+
+        /* TOTAL */
+
+        .total-box {
+            background: #f7f7fb;
+            border: 1px solid #e0e4e9;
+            border-radius: 8px;
+            margin-top: 14px;
+            padding: 12px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 2px;
+            border-bottom: 1px solid #e3e5e8;
+            font-size: 12px;
+        }
+
+        .total-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-row strong {
+            color: #3978bd;
+        }
+
+        /* VENUE SUGGESTIONS */
+
+        .suggestion-box {
+            background: #f7f7fb;
+            border: 1px solid #e0e4e9;
+            border-radius: 8px;
+            margin-top: 14px;
+            padding: 12px;
+        }
+
+        .box-title {
+            color: #315f8d;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .venue-item {
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 11px;
+            margin-top: 7px;
+        }
+
+        .venue-name {
+            font-weight: bold;
+            font-size: 13px;
+            color: #37474f;
+        }
+
+        .venue-details {
+            margin-top: 6px;
+            color: #546e7a;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* ADDITIONAL SUGGESTIONS */
+
+        .additional-box {
+            background: #f7f7fb;
+            border: 1px solid #e0e4e9;
+            border-radius: 8px;
+            margin-top: 14px;
+            padding: 12px;
+        }
+
+        .additional-list {
+            padding-left: 18px;
+            color: #546e7a;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* BACK */
+
+        .back-area {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #3978bd;
+            color: white;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .back-btn:hover {
+            background: #285f96;
+        }
+
+        /* PRINT */
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            .page {
+                width: 100%;
+                margin: 0;
+            }
+
+            .recommendation-card {
+                box-shadow: none;
+            }
+
+            .print-btn,
+            .back-area {
+                display: none;
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .page {
+                width: 94%;
+                margin: 15px auto;
+            }
+
+            .recommendation-card {
+                padding: 14px;
+            }
+
+            .top-row {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .title {
+                font-size: 20px;
+            }
+
+            .budget-title {
+                font-size: 16px;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .item-top {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .shop-links {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="recommendation-card">
+
+        <!-- TITLE -->
+        <div class="top-row">
+
+            <div class="title">
+                Your Party Budget Plan
+            </div>
+
+            <button
+                class="print-btn"
+                onclick="window.print()"
+            >
+                🖨 Print/Save
+            </button>
+
+        </div>
+
+
+        <!-- BUDGET -->
+        <div class="budget-title">
+
+            Budget:
+            ₹{{ "%.2f"|format(
+                recommendation.get("total_budget", 0)|float
+            ) }}
+
+        </div>
+
+
+        <!-- BUDGET BREAKDOWN -->
+        {% set breakdown = recommendation.get("budget_breakdown", []) %}
+
+        {% for category in breakdown %}
+
+            {% set category_name = category.get("category", "Category") %}
+            {% set allocation = category.get("allocation", 0) %}
+            {% set category_items = category.get("items", []) %}
+
+            <div class="category">
+
+                <div class="category-header">
+
+                    <div class="category-name">
+
+                        {% if "venue" in category_name|lower %}
+                            📍
+                        {% elif "catering" in category_name|lower %}
+                            🍽️
+                        {% elif "entertainment" in category_name|lower %}
+                            🎵
+                        {% elif "decoration" in category_name|lower %}
+                            🎈
+                        {% elif "contingency" in category_name|lower %}
+                            🔵
+                        {% else %}
+                            •
+                        {% endif %}
+
+                        {{ category_name }}
+
+                    </div>
+
+                    <div class="category-allocation">
+                        ₹{{ "%.2f"|format(allocation|float) }}
+                    </div>
+
+                </div>
+
+
+                <!-- ITEMS -->
+
+                {% for item in category_items %}
+
+                    {% set item_name = item.get("name", "Item") %}
+                    {% set description = item.get("description", "") %}
+                    {% set price = item.get("estimated_price", item.get("price", 0)) %}
+                    {% set quantity = item.get("quantity", "") %}
+                    {% set links = item.get("shopping_links", []) %}
+
+                    <div class="item">
+
+                        <div class="item-top">
+
+                            <div class="item-name">
+                                {{ item_name }}
+                            </div>
+
+                            <div class="item-price">
+                                ₹{{ "%.2f"|format(price|float) }}
+                            </div>
+
+                        </div>
+
+
+                        {% if description %}
+                            <div class="item-description">
+                                {{ description }}
+                            </div>
+                        {% endif %}
+
+
+                        {% if quantity %}
+                            <div class="quantity">
+                                Quantity: {{ quantity }}
+                            </div>
+                        {% endif %}
+
+
+                        {% if links %}
+
+                            <div class="shop-row">
+
+                                Shop on:
+
+                                <span class="shop-links">
+
+                                    {% if links is mapping %}
+
+                                        {% for shop_name, shop_url in links.items() %}
+
+                                            <a
+                                                class="shop-link"
+                                                href="{{ shop_url }}"
+                                                target="_blank"
+                                            >
+                                                {{ shop_name }}
+                                            </a>
+
+                                        {% endfor %}
+
+                                    {% else %}
+
+                                        {% for link in links %}
+
+                                            {% if link is mapping %}
+
+                                                <a
+                                                    class="shop-link"
+                                                    href="{{ link.get('url', '#') }}"
+                                                    target="_blank"
+                                                >
+                                                    {{ link.get('name', 'Amazon') }}
+                                                </a>
+
+                                            {% else %}
+
+                                                <a
+                                                    class="shop-link"
+                                                    href="{{ link }}"
+                                                    target="_blank"
+                                                >
+                                                    Amazon
+                                                </a>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                    {% endif %}
+
+                                </span>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endfor %}
+
+
+        <!-- TOTAL BUDGET -->
+
+        <div class="total-box">
+
+            <div class="total-row">
+
+                <span>Total Budget</span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(
+                        recommendation.get("total_budget", 0)|float
+                    ) }}
+                </strong>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>Allocated</span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(
+                        recommendation.get("allocated_budget", 0)|float
+                    ) }}
+                </strong>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>Remaining</span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(
+                        recommendation.get("remaining_budget", 0)|float
+                    ) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- VENUE SUGGESTIONS -->
+
+        {% set venues = recommendation.get("venue_suggestions", []) %}
+
+        {% if venues %}
+
+            <div class="suggestion-box">
+
+                <div class="box-title">
+                    📍 Venue Suggestions
+                </div>
+
+
+                {% for venue in venues %}
+
+                    <div class="venue-item">
+
+                        {% if venue is mapping %}
+
+                            <div class="venue-name">
+                                {{ venue.get("name", "Venue") }}
+
+                                <span style="float:right;">
+                                    ₹{{ "%.2f"|format(
+                                        venue.get("estimated_cost", 0)|float
+                                    ) }}
+                                </span>
+                            </div>
+
+
+                            <div class="venue-details">
+
+                                {% if venue.get("type") %}
+                                    ● Type: {{ venue.get("type") }}<br>
+                                {% endif %}
+
+                                {% if venue.get("location") %}
+                                    ● Location: {{ venue.get("location") }}<br>
+                                {% endif %}
+
+                                {% if venue.get("description") %}
+                                    ● {{ venue.get("description") }}
+                                {% endif %}
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="venue-name">
+                                {{ venue }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- ADDITIONAL SUGGESTIONS -->
+
+        {% set suggestions = recommendation.get(
+            "additional_suggestions",
+            []
+        ) %}
+
+        {% if suggestions %}
+
+            <div class="additional-box">
+
+                <div class="box-title">
+                    💡 Additional Suggestions
+                </div>
+
+                <ul class="additional-list">
+
+                    {% if suggestions is string %}
+
+                        <li>{{ suggestions }}</li>
+
+                    {% else %}
+
+                        {% for suggestion in suggestions %}
+
+                            <li>{{ suggestion }}</li>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- BACK -->
+
+        <div class="back-area">
+
+            <a
+                href="/party-planner"
+                class="back-btn"
+            >
+                ← Back to Party Planner
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
